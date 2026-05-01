@@ -29,3 +29,37 @@ To address these issues, we propose ATTNPO, a low-overhead process-supervised RL
   <img src="assets/kfh.png" style="width:50%; height:auto;" />
   <img src="assets/framework.png" style="width:50%; height:auto;" />
 </div>
+
+## 📦 Contents
+
+### Step 1: Set Up the Environment
+
+```bash
+git clone https://github.com/NieSYsc20/AttnPO.git
+cd ATTNPO
+conda create -n attnpo python==3.10
+conda activate attnpo
+pip install --no-deps -e .
+pip install -r requirements.txt
+pip3 install flash-attn==2.7.4.post1 --no-build-isolation
+# Replace the default Qwen2 modeling file in transformers with the AttnPO-modified version
+cp modeling_qwen2.py $(python -c "import transformers; import os; print(os.path.join(os.path.dirname(transformers.__file__), 'models/qwen2/modeling_qwen2.py'))")
+```
+
+### Step 2: Training
+```bash
+bash scripts/attnpo_ds1.5b.sh
+```
+
+## 📝 Citation
+
+If you find our work useful, please consider citing our paper:
+
+```bibtex
+@article{nie2026attnpo,
+  title={ATTNPO: Attention-Guided Process Supervision for Efficient Reasoning},
+  author={Nie, Shuaiyi and Ding, Siyu and Zhang, Wenyuan and Yu, Linhao and Yang, Tianmeng and Chen, Yao and Liu, Tingwen and Yin, Weichong and Sun, Yu and Wu, Hua},
+  journal={arXiv preprint arXiv:2602.09953},
+  year={2026}
+}
+```
